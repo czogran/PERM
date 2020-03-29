@@ -27,13 +27,13 @@ end
 % dla u³atwienia póŸniejszej analizy od razu mo¿na odj¹æ od sygna³u sk³adow¹ sta³¹
 br = br - mean(br);
 
-% br=[];
+% c=br(100:250)
+% br=[c c c c c c c c];
 dlugosc_filmiku=10;
 
 probki=length(br);
 czestotliwosc_probkowania=probki/dlugosc_filmiku;
 
-plot(br)
 
 % tetno przy u¿yciu przejœæ przez 0
 n=length(br);
@@ -67,4 +67,5 @@ transformata=abs(fft(br));
 transformata=transformata(1:length(transformata)/2+1);
 [M czestotliwosc_fft]=max(transformata);
 
-tetno_fft=60*czestotliwosc_probkowania/czestotliwosc_fft;
+f_step=czestotliwosc_probkowania/probki;
+tetno_fft=czestotliwosc_fft*f_step*60;
