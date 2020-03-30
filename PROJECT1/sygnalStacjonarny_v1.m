@@ -36,7 +36,7 @@
     xlabel('f[Hz]');
     ylabel('amplituda')
     title('widmo amplitudowe')
-%     saveas(gcf,'docs/widmoAmplitudowe.png')
+    saveas(gcf,'docs/widmoAmplitudowe.png')
     hold off
     
     figure;
@@ -44,7 +44,7 @@
     xlabel('f[Hz]')
     ylabel('faza')
     title('widmo fazowe')
-%     saveas(gcf,'docs/widmoFazowe.png')
+    saveas(gcf,'docs/widmoFazowe.png')
     hold off
     
 
@@ -72,17 +72,17 @@
     title('sygna³ zaszumiony i odszumiony')
     
     legend("zaszumiony","odszumiony",'Location','best')
-%     saveas(gcf,'docs/szumOdszum.png')
+    saveas(gcf,'docs/szumOdszum.png')
     hold off
 
     figure
     plot(x,'Color',[0.8 0.8 0.8]);
     hold on
-    plot(x_odszum)
+    plot(x_odszum,'--')
     
     xlabel('t[ms]');
     ylabel('sygna³')
     title('sygna³ oryginalny i odszumiony')
     legend("oryginalny","odszumiony",'Location','best')
-%     saveas(gcf,'docs/orgOdszum.png')
+    saveas(gcf,'docs/orgOdszum.png')
     hold off
