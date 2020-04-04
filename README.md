@@ -3,4 +3,4 @@
 # ZESPÓŁ:
 ## PAWEŁ RAWICKI
 ## RADOSŁAW PIETKUN
-# SZCZEGÓŁY NA WIKI
+# [SCZEGÓŁY NA WIKI](https://github.com/czogran/PERM/wiki)
