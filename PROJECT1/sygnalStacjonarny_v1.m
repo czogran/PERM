@@ -1,6 +1,6 @@
 % Generowanie sygna³u stacjonarnego
     % Parametry systemu
-    Fs = 1000;         % Czêstotliwoœæ próbkowania [Hz]
+    Fs = 000;         % Czêstotliwoœæ próbkowania [Hz]
     T = 1/Fs;          % Okres próbkowania [s]
     L = 1000;          % D³ugoœæ sygna³u (liczba próbek)
     t = (0:L-1)*T;     % Podstawa czasu
