@@ -28,30 +28,30 @@ win_len = 512;
 win_overlap =256;
 nfft = 512;
 
-% figure;
-% spectrogram(yLP, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
-% t=sprintf('Sygna³ przefiltrowany filtrem LP, fc=%dHz',f_cutoff_LP);
-% title(t);
-% 
-% figure;
-% spectrogram(yBP1, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
-% t=sprintf('Sygna³ przefiltrowany filtrem BP, fc1=%dHz, fc2=%dHz',f_cutoff_LP,f_cutoff_BP1);
-% title(t);
-% 
-% figure;
-% spectrogram(yBP2, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
-% t=sprintf('Sygna³ przefiltrowany filtrem BP, fc1=%dHz, fc2=%dHz',f_cutoff_BP1,f_cutoff_BP2);
-% title(t);
-% 
-% figure;
-% spectrogram(yBP3, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
-% t=sprintf('Sygna³ przefiltrowany filtrem BP, fc1=%dHz, fc2=%dHz',f_cutoff_BP2,f_cutoff_HP);
-% title(t);
-% 
-% figure;
-% spectrogram(yHP, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
-% t=sprintf('Sygna³ przefiltrowany filtrem HP, fc=%dHz',f_cutoff_HP);
-% title(t);
+figure;
+spectrogram(yLP, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
+t=sprintf('Sygna³ przefiltrowany filtrem LP, fc=%dHz',f_cutoff_LP);
+title(t);
+
+figure;
+spectrogram(yBP1, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
+t=sprintf('Sygna³ przefiltrowany filtrem BP, fc1=%dHz, fc2=%dHz',f_cutoff_LP,f_cutoff_BP1);
+title(t);
+
+figure;
+spectrogram(yBP2, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
+t=sprintf('Sygna³ przefiltrowany filtrem BP, fc1=%dHz, fc2=%dHz',f_cutoff_BP1,f_cutoff_BP2);
+title(t);
+
+figure;
+spectrogram(yBP3, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
+t=sprintf('Sygna³ przefiltrowany filtrem BP, fc1=%dHz, fc2=%dHz',f_cutoff_BP2,f_cutoff_HP);
+title(t);
+
+figure;
+spectrogram(yHP, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
+t=sprintf('Sygna³ przefiltrowany filtrem HP, fc=%dHz',f_cutoff_HP);
+title(t);
 
 
 % figure;
@@ -72,7 +72,7 @@ nfft = 512;
 
 
 % widmo=fft(fLP);
-% widmo=widmo(1:floor(length(widmo)/2)+1);
+% widmo=widmo(1:floor(length(widmo)/2)+1); % wyciecie polowy probek
 % plot(0:0.5/(length(widmo)-1):0.5,abs(widmo));
 % title("Charakterystyka czêstotliwoœciowa filtru");
 % xlabel('Czêstotliwoœæ (u³amek fs)');
