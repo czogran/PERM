@@ -16,7 +16,7 @@ fc2=f_cutoff2/fs;
 BW=800; % w Hz
 BW=BW/fs; % jako ulamek fs
 
-[y,f]=bandPassFilter_v1(s,fc1,fc2, BW); % filtracja BP
+[y,f]=bandPassFilter(s,fc1,fc2, BW); % filtracja BP
 
 figure;
 plot(0:1/fs*1000:(length(s)-1)/fs*1000,s);
