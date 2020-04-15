@@ -3,8 +3,14 @@ s = textread('signal.txt','%f');
 fs = 200e3;
 fb = 40e3;
  
-dist=calculate_dist(s,fs,fb)
+dist=calculate_dist(s,fs,fb);
+% echo wrocilo do odbiornika po czasie 62,98 ms
+% odleglosc do przeszkody wynosi 10.8 m
 
+% W tym miejscu program w zasadzie moglby sie zakonczyc.
+% Ponizsza czesc kodu sluzy jedynie do zebranie danych potrzebnych
+% do narysowania wykresu i pokrywa sie w duzej mierze z kodem funkcji
+% 'calcutate_dist.m'
 
 % predkosc dzwieku
 sound_speed=343; %[m/s]
@@ -70,4 +76,4 @@ title("korelacja odfiltrowanego sygna³u czujnika"+newline+...
 "z sygna³em prostok¹tnym")
 legend('sygna³ zaszumiony','sygna³ odfiltrowany','korelacja (przeskalowana)','Location', 'best');
  
- saveas(gcf,'.\rysunki\zad3_korelacja.png');
+%  saveas(gcf,'.\rysunki\zad3_korelacja.png');
