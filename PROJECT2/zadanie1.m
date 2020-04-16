@@ -56,12 +56,12 @@ t=sprintf('Sygna³ przefiltrowany filtrem HP, fc=%dHz',f_cutoff_HP);
 title(t);
 
 
-% figure;
-% plot(fLP);
-% title("Odp.imp. filtru LP");
-% figure;
-% plot(fHP);
-% title("Odp.imp. filtru HP");
+figure;
+plot(fLP);
+title("Odp.imp. filtru LP");
+figure;
+plot(fHP);
+title("Odp.imp. filtru HP");
 % figure;
 % plot(fBP1);
 % title("Odp.imp. filtru BP1");

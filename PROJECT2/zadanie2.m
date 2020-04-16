@@ -1,5 +1,6 @@
 % Filtry rekurencyjne IIR
 clear all;
+close all;
 
 [sig, fs] = audioread('./records/dzienDobry.wav');
 
@@ -51,9 +52,11 @@ m_HP = [0 0 1 1 ]; % wzmocnienie
 [h_HP,w_HP] = freqz(b_HP,a_HP); % odpowiedz czestotliwosciowa
 
 
-
-
-
+yLP=filter(b_LP,a_LP,sig(:,1));
+yBP1=filter(b_BP1,a_BP1,sig(:,1));
+yBP2=filter(b_BP2,a_BP2,sig(:,1));
+yBP3=filter(b_BP3,a_BP3,sig(:,1));
+yHP=filter(b_HP,a_HP,sig(:,1));
 
 % % FILTR LP - wykres %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure;
@@ -122,4 +125,41 @@ legend("Filtr rzeczywisty","Filtr idealny");
 grid on;
 
 
+
+win_len = 512;
+win_overlap =256;
+nfft = 512;
+
+figure;
+spectrogram(yLP, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
+t=sprintf('Sygna³ przefiltrowany rekurencyjnym filtrem LP, fc=%dHz',f_cutoff_LP);
+title(t);
+saveas(gcf,'.\rysunki\zad2_spect_LP.png');
+
+figure;
+spectrogram(yBP1, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
+t=sprintf('Sygna³ przefiltrowany rekurencyjnym filtrem BP, fc1=%dHz, fc2=%dHz',f_cutoff_LP,f_cutoff_BP1);
+title(t);
+saveas(gcf,'.\rysunki\zad2_spect_BP1.png');
+
+
+figure;
+spectrogram(yBP2, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
+t=sprintf('Sygna³ przefiltrowany rekurencyjnym filtrem BP, fc1=%dHz, fc2=%dHz',f_cutoff_BP1,f_cutoff_BP2);
+title(t);
+saveas(gcf,'.\rysunki\zad2_spect_BP2.png');
+
+
+figure;
+spectrogram(yBP3, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
+t=sprintf('Sygna³ przefiltrowany rekurencyjnym filtrem BP, fc1=%dHz, fc2=%dHz',f_cutoff_BP2,f_cutoff_HP);
+title(t);
+saveas(gcf,'.\rysunki\zad2_spect_BP3.png');
+
+
+figure;
+spectrogram(yHP, win_len, win_overlap, nfft, fs, 'MinThreshold', -100, 'yaxis');
+t=sprintf('Sygna³ przefiltrowany rekurencyjnym filtrem HP, fc=%dHz',f_cutoff_HP);
+title(t);
+saveas(gcf,'.\rysunki\zad2_spect_HP.png');
 

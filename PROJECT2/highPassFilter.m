@@ -29,6 +29,10 @@ f=f/K;
 % inwersja spektralna LP->HP
 f=-f;
 f(find(f==min(f)))=f(find(f==min(f)))+1;
+% 
+% figure
+% plot(f)
+% hold off
 
 y=conv(sig,f); % splot sygnalu wejsciowego i odp. imp. filtru
 
