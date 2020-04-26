@@ -103,4 +103,4 @@ title("ODTWORZONY OBRAZ");
 saveas(h1,'.\img\task1ReprojectionErrors\wideReprojectionErrors.png');
 saveas(h2,'.\img\task1Extrinsics\wideExtrinsics.png');
 saveas(h3,'.\img\task1Image\wideOriginal.png');
-saveas(h4,'.\img\task1Image\wideUndistorted.png');
+saveas(h4,'.\img\task1Extrinsics\wideExtrinsics.png');
