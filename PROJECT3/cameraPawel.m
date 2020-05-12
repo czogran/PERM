@@ -71,7 +71,7 @@ title("ODTWORZONY OBRAZ");
 % showdemo('MeasuringPlanarObjectsExample')
 % showdemo('StructureFromMotionExample')
 
-saveas(h1,'.\img\task1ReprojectionErrors\prCameraReprojectionErrors.png');
-saveas(h2,'.\img\task1Extrinsics\prCameraExtrinsics.png');
-saveas(h3,'.\img\task1Image\prCameraOriginal.png');
-saveas(h4,'.\img\task1Image\prCameraUndistorted.png');
+saveas(h1,'.\img\task2ReprojectionErrors\prCameraReprojectionErrors.png');
+saveas(h2,'.\img\task2Extrinsics\prCameraExtrinsics.png');
+saveas(h3,'.\img\task2Image\prCameraOriginal.png');
+saveas(h4,'.\img\task2Image\prCameraUndistorted.png');
