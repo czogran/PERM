@@ -5,7 +5,7 @@ clear
 clc
 %% Load images
 % Choose idx'th image
-idx =15;
+idx =133;
 [IL,IR] = returnStereoImages(idx);
 
 % View the extracted image
@@ -21,7 +21,7 @@ load stereoParams
 [JL, JR] = rectifyStereoImages(IL,IR,stereoParams);
 
 %% Generate Disparity Map
-disparityRange = [0 64];
+disparityRange = [0 16];
 disparityMap = disparity(rgb2gray(JL),rgb2gray(JR),'DisparityRange',disparityRange);
 
 % View the disparity map
@@ -39,7 +39,7 @@ ptCloud = reconstructScene(disparityMap,stereoParams);
 ptCloud = ptCloud/1000;
 
 % Limit the range of Z and X for display.
-thresholds=[-5 5;-5 0;10 35];  
+thresholds=[-5 5;-5 0;0 10];  
 ptCloud = thresholdPC(ptCloud,thresholds);
 
 % View point cloud
@@ -51,8 +51,8 @@ zlabel('Z');
 title('Point Cloud');
 
 %% Extract Image corresponding to the distance 20 to 30 meters
-lb = 10;
-ub = 35;
+lb = 0;
+ub = 10;
 Z = ptCloud(:,:, 3);
 mask = repmat(Z>lb & Z<ub, [1,1,3]);
 KL = JL;
