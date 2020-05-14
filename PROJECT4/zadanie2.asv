@@ -4,7 +4,7 @@ close all;
 
 load stereoParams
 
-% idx=133;
+idx=133;
  idx=61;
 % idx=2;
 
@@ -54,12 +54,15 @@ points3D = reconstructScene(disparityMap, stereoParams);
     points3D = points3D ./ 1000;
     ptCloud = pointCloud(points3D, 'Color', IL);
 
-for i=1:7
+for i=4:4
     z=[5*i, 10+5*i];
+%         z=[5*i, 30+5*i];
+
     y=[-4, 4+i];
     % Create a streaming point cloud viewer
     % player3D = pcplayer([-5, 5], [-5, 5], [0, 50], 'VerticalAxis', 'y', ...
 
+    
     player3D = pcplayer([-5, 5], y, z, 'VerticalAxis', 'y', ...
         'VerticalAxisDir', 'down');
 
@@ -80,18 +83,15 @@ for i=1:7
     % title('Distance Thresholded Image')
 
 
-
-
-
     figure
-    imshow(KL)
+    imshow(IL)
     COD = vision.CascadeObjectDetector('CarDetector.xml','UseROI',true);
-    [nr,nc,~] = size(KL);
-    xleft = 380;
-    yupper = 160;
-    roi = [xleft yupper nc-2*xleft nr-yupper+1];
-    frame = insertObjectAnnotation(KL,'rectangle',roi,'ROI'); % title
-    bboxes = step(COD,KL,roi);
+    [nr,nc,~] = size(IL);
+    xleft = 400;
+    yupper = 100;
+    roi = [xleft yupper nc-2*xleft nr-2*yupper+1];
+    frame = insertObjectAnnotation(IL,'rectangle',roi,'ROI'); % title
+    bboxes = step(COD,IL,roi);
     frame = insertObjectAnnotation(frame,'rectangle',bboxes,'Car'); % title
     imshow(frame)
     title('Bounding Boxes for Car detected with Cascade Object Detector');
@@ -102,16 +102,67 @@ for i=1:7
     y1 = bboxes(:,2);
     y2 = bboxes(:,2)+bboxes(:,4);
     ptCloudZRoi = points3D(y1:y2,x1:x2,3);
+    
+    indeks=1;
+    ptCloudZRoiNoInf=0
+    for k=1:width(ptCloudZRoi)
+            for k=1:length(ptCloudZRoi)
+                if(ptCloudZRoi==
+            end
+    end
+
 
     % Calculate the average z value or distance
+    figure
     distance = mean(ptCloudZRoi(:),'omitnan');
-    frame = insertObjectAnnotation(KL,'rectangle',bboxes,num2str(distance));
+    frame = insertObjectAnnotation(IL,'rectangle',bboxes,num2str(distance));
+    imshow(frame)
 
+
+
+
+
+    figure
+    imshow(KL)
+    COD = vision.CascadeObjectDetector('CarDetector.xml','UseROI',true);
+    [nr,nc,~] = size(KL);
+%     xleft = 380;
+%     yupper = 160;
+%     roi = [xleft yupper nc-2*xleft nr-yupper+1];
+    xleft = 400;
+    yupper = 100;
+    roi = [xleft yupper nc-2*xleft nr-2*yupper+1];
+    frame = insertObjectAnnotation(KL,'rectangle',roi,'ROI'); % title
+    bboxes = step(COD,KL,roi);
+    frame = insertObjectAnnotation(frame,'rectangle',bboxes,'Car'); % title
+    imshow(frame)
+    title('Bounding Boxes for Car detected with Cascade Object Detector');
+
+%     % Extract a roi from z layer of point cloud
+%     x1 = bboxes(:,1);
+%     x2 = bboxes(:,1)+bboxes(:,3);
+%     y1 = bboxes(:,2);
+%     y2 = bboxes(:,2)+bboxes(:,4);
+%     ptCloudZRoi = points3D(y1:y2,x1:x2,3);
+% 
+%     % Calculate the average z value or distance
+%     distance = mean(ptCloudZRoi(:),'omitnan');
+%     frame = insertObjectAnnotation(KL,'rectangle',bboxes,num2str(distance));
+% 
+%     %     Overlay the average distance onto the image
+%     figure
+%     frame = insertObjectAnnotation(IL,'rectangle',bboxes,num2str(distance));
+%     imshow(frame)
 
 end
+% Overlay the average distance onto the image
+% frame = insertObjectAnnotation(IL,'rectangle',bboxes,num2str(distance));
+% figure
+% imshow(frame)
+% 
 % % Overlay the average distance onto the image
 % frame = insertObjectAnnotation(KL,'rectangle',bboxes,num2str(distance));
 % figure
 % imshow(frame)
-
-
+% 
+% 
