@@ -49,7 +49,7 @@ points3D = reconstructScene(disparityMap, stereoParams);
 points3D = points3D ./ 1000;
 ptCloud = pointCloud(points3D, 'Color', IL);
 
-for i=1:1
+for i=10:10
     z=[5*i, 10+5*i];
 %         z=[5*i, 30+5*i];
 
