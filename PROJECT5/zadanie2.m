@@ -1,5 +1,5 @@
 
-% imageRegionAnalyzer(logical(BW1))
+imageRegionAnalyzer(logical(BW1))
 
 stats = regionprops(CC,'all');
 stats_binary = regionprops(CC_binary,'all');
