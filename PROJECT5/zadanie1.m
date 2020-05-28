@@ -39,7 +39,7 @@ I3(:,:,2)=I3(:,:,2)*(avgG/meanG(3));
 I3(:,:,3)=I3(:,:,3)*(avgB/meanB(3));
 
 % Wybor obrazka do analizy
-I=I1;
+I=I3;
 
 [BW,maskedRGBImage]=createMask3(I);
 % figure;
@@ -51,12 +51,12 @@ I=I1;
 
 
 [BW1,segmentedImage]=segmentImage(I,BW);
-% figure;
-% imshow(BW1);
-% hold off;
-% figure;
-% imshow(segmentedImage);
-% hold off;
+figure;
+imshow(BW1);
+hold off;
+figure;
+imshow(segmentedImage);
+hold off;
 
 CC=bwconncomp(segmentedImage)
 

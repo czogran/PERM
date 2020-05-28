@@ -38,14 +38,26 @@ I3(:,:,1)=I3(:,:,1)*(avgR/meanR(3));
 I3(:,:,2)=I3(:,:,2)*(avgG/meanG(3));
 I3(:,:,3)=I3(:,:,3)*(avgB/meanB(3));
 
-[BW,maskedRGBImage]=createMask(I3);
+I=I3;
+img=image3;
+
 figure
-imshow(maskedRGBImage)
+imshow([I, img]);
 hold off
 
-[BW1,segmentedImage]=segmentImage(I3,BW);
+[BW,maskedRGBImage]=createMask(I);
+% figure
+% imshow(maskedRGBImage)
+% hold off
+
+[BW1,segmentedImage]=segmentImage(I,BW);
 
 figure
 imshow(segmentedImage)
 hold off
+
+figure
+imshow(BW1)
+hold off
+
 
