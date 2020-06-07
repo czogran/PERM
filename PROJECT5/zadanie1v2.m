@@ -38,8 +38,8 @@ I3(:,:,1)=I3(:,:,1)*(avgR/meanR(3));
 I3(:,:,2)=I3(:,:,2)*(avgG/meanG(3));
 I3(:,:,3)=I3(:,:,3)*(avgB/meanB(3));
 
-I=I3;
-img=image3;
+I=I1;
+img=image1;
 
 figure
 imshow([I, img]);
@@ -60,4 +60,6 @@ figure
 imshow(BW1)
 hold off
 
+CC=bwconncomp(segmentedImage)
 
+% CC_binary=bwconncomp(BW1)

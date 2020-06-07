@@ -1,0 +1,116 @@
+% clc;
+% clear all;
+% close all;
+imds = {'./HOG_features/hog_image0.jpg'};
+
+imds = imageDatastore({...
+    './HOG_features/hog_image0.jpg',...
+    './HOG_features/hog_image1.jpg',...
+    './HOG_features/hog_image2.jpg',...
+    './HOG_features/hog_image3.jpg',...
+    './HOG_features/hog_image4.jpg',...
+    './HOG_features/hog_image5.jpg',...
+    './HOG_features/hog_image6.jpg',...
+    './HOG_features/hog_image7.jpg',...
+    './HOG_features/hog_image8.jpg',...
+    './HOG_features/hog_image+.jpg',...
+    './HOG_features/hog_image-.jpg',...
+    './HOG_features/hog_imageX.jpg',...
+    './HOG_features/hog_imageDiv.jpg',...
+    });
+img = readimage(imds,13);
+
+img = readimage(trainingSet, 206);
+
+trainingSet
+numImages = numel(trainingSet.Files);
+trainingFeatures = zeros(numImages, hogFeatureSize, 'single');
+
+for i = 1:numImages
+    img = readimage(trainingSet, i);
+    
+    img = rgb2gray(img);
+    
+    % Apply pre-processing steps
+    img = imbinarize(img);
+    
+    trainingFeatures(i, :) = extractHOGFeatures(img, 'CellSize', cellSize);  
+end
+
+% Get labels for each image.
+trainingLabels = trainingSet.Labels;
+
+
+
+
+
+
+
+% classifier={};
+% 
+% classifier =load('./HOG_features/hog_feature1').hog_4x4;
+% 
+% 
+% image = load('./segmented_image/segmented.mat');
+% image=image.J;
+% CC_binary=load('segmented_image/CC_binary.mat');
+% CC_binary=CC_binary.CC_binary;
+% stats_binary = regionprops(CC_binary,'all');
+% 
+% 
+% img_size=size(image); 
+% position=[];
+% shape=[];
+% % for k=1:size(stats_binary,1)
+% % dla k:1:7 wykrywa liczby od 0 do 6
+% % 7 k=20
+% % 8 k= 35
+% % x k=12
+% % + l=10
+% % - k=11
+% % / (dzielenie) k=
+% for k=1:1
+%     index=CC_binary.PixelIdxList{k};
+%     [row column]=ind2sub(img_size(1:2),index);
+% 
+%     % określenie kształtu
+%     if stats_binary(k).Circularity>0.9537
+%         length_a=round(sqrt(stats_binary(k).Area*4/pi)); % średnica
+%     else
+%        length_a=round( sqrt(stats_binary(k).Area)); % długość boku
+%         square_orient=round(stats_binary(k).Orientation);
+%     end    
+%     % zmniejszenie dlugosci boku, eksoerymentalne
+%     length_a=length_a-10;
+%     position=floor(stats_binary(k).Centroid(1:2));
+%     position=position-length_a*sqrt(2)/3;
+%     rect_dimension=[position,length_a,length_a];
+%     I_cut = imcrop(image,rect_dimension);
+% %     figure
+% %     imshow(I_cut)
+% %     
+%     [hog_4x4, vis4x4]=extractHOGFeatures(I_cut,'CellSize',[4 4]);
+% 
+% %     figure
+% %     plot(vis4x4)
+%     
+%     X=classifier';
+%     Y=hog_4x4';
+% 
+%     Idx=knnsearch(X,Y);
+% 
+%     amount= sum(ismember(Idx,1));
+% 
+%     diffrence(k)=length(Y)-amount;
+% 
+% end
+
+% X=classifier';
+% Y=hog_4x4';
+% 
+% Idx=knnsearch(X,Y);
+% 
+% amount= sum(ismember(Idx,1));
+% 
+% diffrence=length(Y)-amount;
+% 
