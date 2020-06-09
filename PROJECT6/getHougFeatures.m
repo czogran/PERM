@@ -1,3 +1,7 @@
+% ---------------------------------------------------------------%
+% ----WYZNACZANIE CHECH HOG DLA SYMBOLI Z PRZYKŁADOWEGO OBRAZKA--%
+%----------------------------------------------------------------%
+
 close all;
 clear all;
 clc;
@@ -12,7 +16,6 @@ stats_binary = regionprops(CC_binary,'all');
 img_size=size(image); 
 position=[];
 shape=[];
-% for k=1:size(stats_binary,1)
 % dla k:1:7 wykrywa liczby od 0 do 6
 % 7 k=20
 % 8 k= 35

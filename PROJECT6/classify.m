@@ -3,6 +3,8 @@
 % close all;
 % imds = {'./HOG_features/hog_image0.jpg'};
 
+% TEST KLASYFIKATORA
+
 filePath ={...
     './HOG_images/hog_image0.jpg',...
     './HOG_images/hog_image1.jpg',...
@@ -57,17 +59,18 @@ classifier = fitcecoc(trainingFeatures, trainingLabels);
 
 % roboczo
 % testSet=trainingSet;
-testSet= imageDatastore(filePath,'Labels',trainingLabels);
+% testSet= imageDatastore(filePath,'Labels',trainingLabels);
+testSet= imageDatastore(filePath(6:8));
 
-[testFeatures, testLabels] = helperExtractHOGFeaturesFromImageSet(testSet, hogFeatureSize, cellSize);
+[testFeatures] = helperExtractHOGFeatures(testSet, hogFeatureSize, cellSize);
 
 % Make class predictions using the test features.
 predictedLabels = predict(classifier, testFeatures);
 
 % Tabulate the results using a confusion matrix.
-confMat = confusionmat(testLabels, predictedLabels);
+confMat = confusionmat(trainingLabels, predictedLabels);
 
-% helperDisplayConfusionMatrix(confMat)
+displayConfusionMatrix(confMat,trainingLabels)
 
 
 

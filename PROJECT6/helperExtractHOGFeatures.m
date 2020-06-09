@@ -1,9 +1,7 @@
-function [features, setLabels] = helperExtractHOGFeaturesFromImageSet(imds, hogFeatureSize, cellSize)
 
-% function [features] = helperExtractHOGFeaturesFromImageSet(imds, hogFeatureSize, cellSize)
+function [features] = helperExtractHOGFeatures(imds, hogFeatureSize, cellSize)
 % Extract HOG features from an imageDatastore.
 
-setLabels = imds.Labels;
 numImages = numel(imds.Files);
 features  = zeros(numImages, hogFeatureSize, 'single');
 
