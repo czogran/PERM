@@ -1,6 +1,6 @@
-% ---------------------------------------------------------------%
-% ----WYZNACZANIE CHECH HOG DLA SYMBOLI Z PRZYKŁADOWEGO OBRAZKA--%
-%----------------------------------------------------------------%
+% ------------------------------------------------------------------------%
+% ----WYZNACZANIE CECH HOG DLA KAŻDEGO Z SYMBOLI Z PRZYKŁADOWEGO OBRAZKA--%
+%-------------------------------------------------------------------------%
 
 close all;
 clear all;
@@ -85,6 +85,7 @@ for k=ekstract_vector
 
  end
     imwrite (I_cut,filename);
+%     imwrite (vis4x4,"feature_"+filename);
 
 end
 

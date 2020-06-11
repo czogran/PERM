@@ -20,6 +20,22 @@ filePath ={...
     './HOG_images/hog_imageX.jpg',...
     './HOG_images/hog_imageDiv.jpg',...
     };
+
+testFilePath = {52};
+testImages={52};
+
+% które obrazki testujemy
+first =1;
+last=52;
+
+for k=first:last
+    fileName="./test_img/test_image"+k+".jpg";
+    fileName=char(fileName);
+    testFilePath{k}=fileName;
+    testImages{k}=imread(testFilePath{k});
+end
+testSet=imageDatastore(testFilePath(first:last));
+
 % img = readimage(imds,13);
 trainingLabels =[0,1,2,3,4,5,6,7,8,"plus","minus","X","Div"];
 % trainingLabels =["0","1","2","3","4","5","6","7","8","plus","minus","X","Div"];
@@ -27,7 +43,7 @@ trainingLabels =[0,1,2,3,4,5,6,7,8,"plus","minus","X","Div"];
 
 numImages = numel(filePath);
 
-trainingSet={};
+trainingSet={numImages};
 for k=1:numImages
     trainingSet{k}=imread(filePath{k});
 end
@@ -60,19 +76,27 @@ classifier = fitcecoc(trainingFeatures, trainingLabels);
 % roboczo
 % testSet=trainingSet;
 % testSet= imageDatastore(filePath,'Labels',trainingLabels);
-testSet= imageDatastore(filePath(6:8));
+% testSet= imageDatastore(filePath(6:8));
 
 [testFeatures] = helperExtractHOGFeatures(testSet, hogFeatureSize, cellSize);
 
 % Make class predictions using the test features.
-predictedLabels = predict(classifier, testFeatures);
+[predictedLabels, score] = predict(classifier, testFeatures);
 
-% Tabulate the results using a confusion matrix.
-confMat = confusionmat(trainingLabels, predictedLabels);
+% % Tabulate the results using a confusion matrix.
+% confMat = confusionmat(trainingLabels, predictedLabels);
+% 
+% displayConfusionMatrix(confMat,trainingLabels)
 
-displayConfusionMatrix(confMat,trainingLabels)
-
-
+indeks=1;
+for k=first:last
+%     tekst="sign:"+string(predictedLabels{indeks})+"  score:"+score{indeks};
+   img_colors =insertText(testImages{k},[50 50; 50 50],predictedLabels{indeks});
+   indeks=indeks+1;
+   figure
+   imshow(img_colors)
+   hold off
+end    
 
 
 
