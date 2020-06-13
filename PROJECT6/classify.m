@@ -1,6 +1,6 @@
-% clc;
-% clear all;
-% close all;
+clc;
+clear all;
+close all;
 % imds = {'./HOG_features/hog_image0.jpg'};
 
 % TEST KLASYFIKATORA
@@ -37,9 +37,9 @@ end
 testSet=imageDatastore(testFilePath(first:last));
 
 % img = readimage(imds,13);
-trainingLabels =[0,1,2,3,4,5,6,7,8,"plus","minus","X","Div"];
-% trainingLabels =["0","1","2","3","4","5","6","7","8","plus","minus","X","Div"];
-
+labels =[0,1,2,3,4,5,6,7,8,"plus","minus","X","Div"];
+% przypisywane gdy sie obraca obrazki
+trainingLabels=[];
 
 numImages = numel(filePath);
 
@@ -47,36 +47,45 @@ trainingSet={numImages};
 for k=1:numImages
     trainingSet{k}=imread(filePath{k});
 end
-% img = readimage(trainingSet, 206);
 
-[hog_4x4, vis4x4] = extractHOGFeatures((trainingSet{1}),'CellSize',[4 4]);
+cellSize = [20 20];
+
+[hog_4x4, vis4x4] = extractHOGFeatures((trainingSet{1}),'CellSize',cellSize);
 hogFeatureSize = length(hog_4x4);
-cellSize = [4 4];
 
+rotation=[0 1 2 3 4 5 8 10 15 20:10:170];
 
-trainingFeatures = zeros(numImages, hogFeatureSize, 'single');
+trainingFeatures = zeros(numImages*size(rotation,2), hogFeatureSize, 'single');
+
+% zalozenie ze wszystkie obrazki do nauka sa takie same, kwadratowe
+background = ones(size(trainingSet{1}))*255;
+i_size=size(trainingSet{1});
+i_dim=[i_size(1) i_size(1) i_size(1)-1 i_size(1)-1];
+indeks=1;
 
 for i = 1:numImages
     img =trainingSet{i};
+    
+    img=[background background background; background img background; background background background];
     
     img = rgb2gray(img);
     
     % Apply pre-processing steps
     img = imbinarize(img);
-    
-    trainingFeatures(i, :) = extractHOGFeatures(img, 'CellSize', cellSize);  
+
+    for k=rotation
+        i_rotate=imrotate(img,k);
+        i_cut = imcrop(img,i_dim);
+        trainingFeatures(indeks, :) = extractHOGFeatures(i_cut, 'CellSize', cellSize); 
+        trainingLabels=[trainingLabels labels(i)];
+        indeks=indeks+1;
+    end
 end
 
 
 
 % fitcecoc uses SVM learners and a 'One-vs-One' encoding scheme.
 classifier = fitcecoc(trainingFeatures, trainingLabels);
-
-
-% roboczo
-% testSet=trainingSet;
-% testSet= imageDatastore(filePath,'Labels',trainingLabels);
-% testSet= imageDatastore(filePath(6:8));
 
 [testFeatures] = helperExtractHOGFeatures(testSet, hogFeatureSize, cellSize);
 
@@ -89,16 +98,18 @@ classifier = fitcecoc(trainingFeatures, trainingLabels);
 % displayConfusionMatrix(confMat,trainingLabels)
 
 indeks=1;
+images={};
 for k=first:last
 %     tekst="sign:"+string(predictedLabels{indeks})+"  score:"+score{indeks};
-   img_colors =insertText(testImages{k},[50 50; 50 50],predictedLabels{indeks});
+   img_colors =insertText(testImages{k},[50 50; 50 50],predictedLabels{indeks},'FontSize',25);
    indeks=indeks+1;
-   figure
-   imshow(img_colors)
-   hold off
+   images{k}= img_colors;
+%    figure
+%    imshow(img_colors)
+%    hold off
 end    
 
-
+montage(images);
 
 
 

@@ -32,7 +32,7 @@ for k=1:length(CC_binary.PixelIdxList)
     % zmniejszenie dlugosci boku, eksperymentalne
     length_a=length_a-10;
     % proba ze stala dlugoscia boku- nie wiem czy tak nie powinno byc
-    length_a=150;
+    length_a=120;
     position=floor(stats_binary(k).Centroid(1:2));
     position=position-length_a*sqrt(2)/3;
     rect_dimension=[position,length_a,length_a];
