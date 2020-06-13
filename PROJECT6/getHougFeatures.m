@@ -102,9 +102,9 @@ for k=ekstract_vector
       filename= "HOG_images/hogDiv"+".jpg";
 
  end
- figure
+     fig1=figure
      plot(vis4x4);
      hold off
-saveas(gcf,'filename','png')
+    saveas(fig1,filename,'png')
 end
 
