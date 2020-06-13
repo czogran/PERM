@@ -43,14 +43,14 @@ for k=ekstract_vector
     position=position-length_a*sqrt(2)/3;
     rect_dimension=[position,length_a,length_a];
     I_cut = imcrop(image,rect_dimension);
-    figure
-    imshow(I_cut)
+%     figure
+%     imshow(I_cut)
     
-    [hog_4x4, vis4x4]=extractHOGFeatures(I_cut,'CellSize',[4 4]);
+    [hog_4x4, vis4x4]=extractHOGFeatures(I_cut,'CellSize',[10 10]);
 
-    figure
-    plot(vis4x4)
-    
+%     figure
+%     plot(vis4x4)
+%     
    
     filename= "HOG_features/hog_feature"+(k-1);
  if(k==10)
@@ -85,7 +85,26 @@ for k=ekstract_vector
 
  end
     imwrite (I_cut,filename);
-%     imwrite (vis4x4,"feature_"+filename);
+    
+    
+ filename= "HOG_images/hog"+(k-1)+".jpg";
+ if(k==10)
+      filename= "HOG_images/hog+"+".jpg";
+ elseif (k==11)
+         filename= "HOG_images/hog-"+".jpg";
+ elseif (k==12)
+      filename= "HOG_images/hogX"+".jpg";
+ elseif (k==20)
+      filename= "HOG_images/hog7"+".jpg";
+  elseif (k==35)
+      filename= "HOG_images/hog8"+".jpg";
+  elseif (k==13)
+      filename= "HOG_images/hogDiv"+".jpg";
 
+ end
+ figure
+     plot(vis4x4);
+     hold off
+saveas(gcf,'filename','png')
 end
 
