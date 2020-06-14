@@ -34,7 +34,7 @@ for k=1:length(CC_binary.PixelIdxList)
     % proba ze stala dlugoscia boku- nie wiem czy tak nie powinno byc
     length_a=120;
     position=floor(stats_binary(k).Centroid(1:2));
-    position=position-length_a*sqrt(2)/3;
+    position=position-length_a*0.5;
     rect_dimension=[position,length_a,length_a];
     I_cut = imcrop(image,rect_dimension);
     figure

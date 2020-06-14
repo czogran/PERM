@@ -79,7 +79,7 @@ for i = 1:numImages
     for k=rotation
         i_rotate=imrotate(img,k);
         % rotacja sie nie udaje
-         i_rotat=img;
+        
         
         i_cut = imcrop( i_rotate,i_dim);
         trainingFeatures(indeks, :) = extractHOGFeatures(i_cut, 'CellSize', cellSize); 
@@ -87,7 +87,6 @@ for i = 1:numImages
         indeks=indeks+1;
     end
     
-%     OBROTY SIE NIE UDAŁY
 %     for k=translationX
 %         for j=translationY
 %             i_trans=imtranslate(img,[k,j]);

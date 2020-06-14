@@ -36,11 +36,13 @@ for k=ekstract_vector
         square_orient=round(stats_binary(k).Orientation);
     end    
     % zmniejszenie dlugosci boku, eksperymentalne
-    length_a=length_a-10;
+%     length_a=length_a-10;
     % proba ze stala dlugoscia boku- nie wiem czy tak nie powinno byc
     length_a=120;
     position=floor(stats_binary(k).Centroid(1:2));
-    position=position-length_a*sqrt(2)/3;
+        position=position-0.5*length_a;
+
+%     position=position-length_a*sqrt(2)/3;
     rect_dimension=[position,length_a,length_a];
     I_cut = imcrop(image,rect_dimension);
 %     figure
